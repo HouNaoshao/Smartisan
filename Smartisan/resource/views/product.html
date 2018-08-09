@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>【锤子科技官网】坚果手机 - 坚果R1手机 - 坚果3手机</title>
+    <meta name="keywords" content="坚果手机,坚果R1手机,坚果3手机,坚果Pro手机,坚果手机官网">
+    <meta name="description" content="锤子科技是一家制造移动互联网终端设备的公司,
+        公司致力于打造用户体验一流的数码消费类产品（智能手机为主）,主打坚果手机系列有坚果R1手机,坚果3手机等">
+    <link rel="shortcut icon" href="/img/icon/favicon.ico">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+<body>
+  <div id="product">
+    <header>
+        <span><a href="/"></a></span>
+        <ul id="nav">
+            <li><a href="/">在线商城</a></li>
+            <li><a href="#">坚果 R1</a></li>
+            <li><a href="#">坚果 TNT 工作站</a></li>
+            <li><a href="#">坚果 3</a></li>
+            <li><a href="#">Smartisan OS</a></li>
+            <li><a href="#">欢喜云</a></li>
+            <li><a href="#">应用</a></li>
+            <li><a href="#">论坛</a></li>
+            <li><a href="#">荣誉与奖项</a></li>
+        </ul>
+        <ul id="person">
+            <li>
+                <a id="p-avatar" :href="personUrl"></a>
+                <div id="p-info">
+                    <span></span>
+                    <div>
+                        <figure>
+                            <img :src="user.avatar">
+                            <figcaption>
+                                <span>{{ user.name }}</span>
+                            </figcaption>
+                        </figure>
+                        <ul>
+                            <li><a href="/user?component=myOrder">我的订单</a></li>
+                            <li><a href="/user?component=myInfo">账户资料</a></li>
+                            <li><a href="/user?component=myAddress">收货地址</a></li>
+                            <li><a href="/" @click="exit">退出</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a id="shortcar" :href="carUrl" @mouseenter="getShortCarItems"></a>
+                <span id="counter" :class="{ redQuantity: quantity === 0 ? false : true }">{{ quantity }}</span>
+                <div id="p-shortcar">
+                    <span></span>
+                    <div>
+                        <template v-if="shortCarArr.length !== 0">
+                            <ul>
+                                <li v-for="(item, index) of shortCarArr" :key="index">
+                                    <a :href="'/product/' + item.product._id">
+                                        <figure>
+                                            <img :src="item.smallImg.product[0]">
+                                            <figcaption>
+                                                <p>{{ item.product.name }}</p>
+                                                <p>{{ item.color.name }}</p>
+                                                <template v-if="capacity">
+                                                    <p>¥ {{ item.capacity.price }} 
+                                                        <span>&nbsp; x {{ item.quantity }}</span>
+                                                    </p>
+                                                </template>
+                                                <template v-else>
+                                                    <p>¥ {{ item.product.price }} 
+                                                        <span>&nbsp; x {{ item.quantity }}</span>
+                                                    </p>
+                                                </template>
+                                            </figcaption>
+                                        </figure>
+                                    </a>
+                                    <span @click="delItemFromCar"></span>
+                                </li>
+                            </ul>
+                            <aside>
+                                <div>
+                                    <p>共{{ quantity }}件商品</p>
+                                    <p>合计：<span>¥ <span>{{ totalMoney }}</span></span></p>
+                                </div>
+                                <a href="/user/shortcar">去结算</a>
+                            </aside>
+                        </template>
+                        <template v-else>
+                            <figure>
+                                <img src="/img/icon/cart-empty.png">
+                                <figcaption><p>空空如也</p></figcaption>
+                            </figure>
+                        </template>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </header>
+
+    <main>
+        <section>
+            <section>
+                <ul>
+                    <li v-for="(img, index) of imgArr[imgIndex].product"
+                        :class="{ boldBorder: index === 0 ? true : false }"
+                        @mouseenter="changeImg(index)">
+                        <img :src="img">
+                    </li>
+                </ul>
+                <figure>
+                    <img :src="imgArr[imgIndex].product[0]">
+                </figure>
+            </section>
+            <section>
+                <ul>
+                    <li>
+                        <div>
+                            <p>{{ item.product.name }}</p>
+                            <p>{{ item.product.feature2 }}</p>
+                        </div>
+                        <template v-if="capacity">
+                            <span>¥ <span>{{ capacity.price }}</span></span>
+                        </template>
+                        <template v-else>
+                            <span>¥ <span>{{ price }}</span></span>    
+                        </template>
+                    </li>
+                    <li>
+                        <span>颜色选择</span>
+                        <ul>
+                            <li v-for="(color, index) of item.colorArr"
+                                :class="{ outerDot: index === 0 ? true : false }"
+                                @click="changeColor(index)">
+                                <img :src="color.url">
+                            </li>
+                        </ul>
+                    </li>
+                    <template v-if="item.capacityArr">
+                        <li class="capacity">
+                            <span>容量选择</span>
+                            <div>
+                                <span v-for="(capacity, index) of item.capacityArr"
+                                    :class="{ blueBorder: index === 0 ? true : false }"
+                                    @click="changeCapacity(index)">
+                                    {{ capacity.name }}</span>
+                            </div>
+                        </li>
+                    </template>
+                    <li>
+                        <span>数量选择</span>
+                        <span id="down" @click="count--"
+                            :class="{ notDown: count === 1 ? true : false }"></span>
+                        <span id="quantity">{{ count }}</span>
+                        <span id="up" @click="count++"></span>
+                    </li>
+                </ul>
+            </section>
+        </section>
+        <template v-if="details.length !== 0">
+            <section>
+                <header><span>产品信息</span></header>
+                <ul>
+                    <li v-for="detail of details">
+                        <img :src="detail">
+                    </li>
+                </ul>
+            </section>
+        </template>
+    </main>
+
+    <aside>
+        <div>
+            <span>您选择了</span>
+            <span>{{ product.name }}</span>
+            <template v-if="capacityArr">
+                <span>({{ color.name }}，{{ capacity.name }})</span>
+                <span class="quantity">x {{ count }}</span>
+            </template>
+            <template v-else>
+                <span class="quantity">x {{ count }}</span>
+                <p class="color">{{ color.name }}</p>
+            </template>
+        </div>
+        <div>
+            <span>¥ <span>{{ total }}</span></span>
+            <a @click="addToCart2">加入购物车</a>
+        </div>
+    </aside>
+
+    <span id="addSuccess">已添加至购物车</span>
+
+    <footer>
+        <p>本网站是个人学习网站开发技术的作品，若你有兴趣和我一块儿交流技术的话，请联系：</p>
+        <p>QQ：11644 82087 &nbsp;&nbsp;&nbsp; mobile：186 3101 2069 &nbsp;&nbsp;&nbsp; 姜展超</p>
+    </footer>
+  </div>
+
+    <script src="/lib/jquery-3.3.1.js"></script>
+    <script src="/lib/jquery.cookie.js"></script>
+    <script src="/lib/vue.js"></script>
+    <script src="/lib/axios.js"></script>
+    <script src="/vue/product.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

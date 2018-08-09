@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>用户登录 - 锤子科技</title>
+	<meta name="keywords" content="坚果手机,坚果R1手机,坚果3手机,坚果Pro手机,坚果手机官网">
+    <meta name="description" content="锤子科技是一家制造移动互联网终端设备的公司,
+        公司致力于打造用户体验一流的数码消费类产品（智能手机为主）,主打坚果手机系列有坚果R1手机,坚果3手机等">
+    <link rel="shortcut icon" href="/img/icon/favicon.ico">
+    <link rel="stylesheet" href="/css/user/login.css">
+</head>
+<body>
+	<main id="login">
+		<header>
+			<figure>
+				<img src="/img/icon/redLogo.png">
+				<figcaption>
+					<p>使用 Smartisan ID 登录官网</p>
+				</figcaption>
+			</figure>
+		</header>
+		<section>
+			<form action="/user/login" method="post" autocomplete="off">
+				<ul>
+					<li>
+						<label for="name"><span class="png-name"></span></label>
+						<input id="name" type="text" name="name" pattern="[\w\u4e00-\u9fa5]+" placeholder=	"用户名" title='注意：可输入汉字、字母、数字和"_"' required autofocus v-model="name" @blur="checkName">
+						<span class="error-name">用户名不存在</span>
+					</li>
+					<li>
+						<label for="pwd"><span class="png-pwd"></span></label>
+						<input id="pwd" type="password" name="pwd" placeholder="密码" title="注意：密码至少是6位" required v-model="pwd" @blur='pwdMatch'>
+						<span class="error-pwd">密码错误</span>
+					</li>
+					<li id="aside">
+						<div class="autoLogin">
+							<input id="checkBox" name="checkBox" type="checkbox" v-model="checkBox">
+							<label for="checkBox">自动登录</label>	
+						</div>
+						<a href="/user/register">注册 Smartisan ID</a>
+					</li>
+				</ul>
+				<input id="submit" class="notAllowed" type="submit" value="登录" @click="foreverCookie">
+			</form>
+		</section>
+	</main>
+	<footer>
+		<p>本网站是个人学习网站开发技术的作品，若你有兴趣和我一块儿交流技术的话，请联系：</p>
+		<p>QQ：11644 82087 &nbsp;&nbsp;&nbsp; mobile：186 3101 2069 &nbsp;&nbsp;&nbsp; 姜展超</p>
+	</footer>
+
+	<script src="/lib/jquery-3.3.1.js"></script>
+    <script src="/lib/vue.js"></script>
+    <script src="/lib/axios.js"></script>
+    <script src="/vue/user/login.js"></script>
+</body>
+</html>

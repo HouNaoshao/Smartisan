@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>密码修改 - 锤子科技</title>
+	<meta name="keywords" content="坚果手机,坚果R1手机,坚果3手机,坚果Pro手机,坚果手机官网">
+    <meta name="description" content="锤子科技是一家制造移动互联网终端设备的公司,
+        公司致力于打造用户体验一流的数码消费类产品（智能手机为主）,主打坚果手机系列有坚果R1手机,坚果3手机等">
+    <link rel="shortcut icon" href="/img/icon/favicon.ico">
+    <link rel="stylesheet" href="/css/user/register.css">
+</head>
+<body>
+	<main id="changePwd">
+		<header>密码修改</header>
+		<section>
+			<form action="/user/changePwd" method="post" autocomplete="off">
+				<ul>
+					<li>
+						<input type="hidden" name="name" v-model="name">
+						<label for="oldPwd"><span class="png-pwd"></span></label>
+						<input id="oldPwd" type="password" name="oldPwd" placeholder="密码" title="注意：密码至少是6位" required v-model="oldPwd" @keyup='oldPwdMatch'>
+						<span class="error-pwd">密码错误</span>
+					</li>
+					<li>
+						<label for="pwd"><span class="png-pwd"></span></label>
+						<input id="pwd" type="password" name="pwd" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\w]{6,32}$" placeholder="密码" title="注意：密码至少是6位，可输入数字、字母和“_”，但必须包含数字和大小写字母" required v-model="pwd" @blur='pwdMatch'>
+					</li>
+					<li>
+						<label for="rePwd"><span class="png-rePwd"></span></label>
+						<input id="rePwd" type="password" name="rePwd" placeholder="确认密码" title="注意：密码至少是6位，可输入数字、字母和“_”，但必须包含数字和大小写字母" required v-model="rePwd" @keyup="pwdMatch">
+						<span class="error-rePwd">两次密码不一致</span>
+					</li>
+				</ul>
+				<input id="submit" class="notAllowed" type="submit" value="修改">
+			</form>
+		</section>
+	</main>
+	<footer>
+		<p>本网站是个人学习网站开发技术的作品，若你有兴趣和我一块儿交流技术的话，请联系：</p>
+		<p>QQ：11644 82087 &nbsp;&nbsp;&nbsp; mobile：186 3101 2069 &nbsp;&nbsp;&nbsp; 姜展超</p>
+	</footer>
+
+	<script src="/lib/jquery-3.3.1.js"></script>
+	<script src="/lib/jquery.cookie.js"></script>
+    <script src="/lib/vue.js"></script>
+    <script src="/lib/axios.js"></script>
+    <script src="/vue/user/changePwd.js"></script>
+</body>
+</html>

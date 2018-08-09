@@ -1,0 +1,443 @@
+.fixed {
+	position: fixed !important;
+	top: 40px !important;
+}
+.showAddress {
+	filter: opacity(1) !important;
+	z-index: 1 !important;
+}
+.blueBorder {
+	border: 1px solid #527ed9 !important;
+}
+.notAllowed {
+	filter: opacity(.5);
+    pointer-events: none;
+}
+.notAllowedAbsolutely {
+	filter: opacity(.5) !important;
+    pointer-events: none !important;
+}
+.showErrorAll {
+	display: block !important;
+}
+
+/********** main **********/
+
+main > section {
+	background-color: white;
+	border-radius: .8em;
+	border: 1px solid rgba(0,0,0,.14);
+	overflow: hidden;
+}
+main > section:first-child {
+	position: absolute;
+}
+main > section:first-child > figure {
+	margin: 1.8em 1.8em 1em 1.8em;
+	text-align: center;
+}
+main > section:first-child > figure img {
+	margin-bottom: 1em;
+	width: 12em;
+	height: 12em;
+}
+main > section:first-child > figure figcaption {
+	font-size: 1.3em;
+	color: #333;
+	font-weight: 700;
+}
+main > section > ul {
+	text-align: center;
+}
+main > section > ul li {
+	padding: 1em 0;
+	border-top: 1px solid #ebebeb;
+	transition: all .15s ease-in-out;
+	cursor: pointer;
+}
+main > section > ul li:hover {
+	background-color: #98afee;
+	color: white;
+}
+
+main > section:last-child {
+	margin-left: 18em;
+	min-width: 68em;
+	min-height: 60vh;
+}
+main > section:last-child > header {
+	background: linear-gradient(#fff,#f5f5f5);
+    border-bottom: 1px solid #dcdcdc;
+    box-shadow: 0 1px 7px rgba(0,0,0,.1);
+}
+main > section:last-child > header p {
+	margin: 0;
+	padding-left: 1.5em;
+	line-height: 3em;
+	font-size: 1.4em;
+}
+#no-order {
+	padding: 5em 0;
+	text-align: center;
+}
+#no-order img {
+	width: 30%;
+}
+
+/********** 我的订单 **********/
+
+main > section:last-child > section article {
+	text-align: center;
+}
+main > section:last-child > section article .products {
+	display: flex;
+	padding: 0 1.8em;
+	align-items: center;
+}
+main > section:last-child > section article .cols {
+	display: flex;
+	padding: 0 2em;
+	line-height: 3em;
+	border-top: 1px solid #dbdbdb;
+	background: #eee;
+    border-bottom: 1px solid #dbdbdb;
+    font-size: .8em;
+}
+main > section:last-child > section article:first-child .cols {
+	border-top: none;
+	box-shadow: inset 0 1px 7px rgba(0,0,0,.1);
+}
+main > section:last-child > section article .products {
+	line-height: 7em;
+}
+main > section:last-child > section article .products .p-img a img {
+	display: list-item;
+	width: 5em;
+	height: 5em;
+	box-sizing: border-box;
+	border: 1px solid #ebebeb;
+}
+main > section:last-child > section article .products .p-price {
+	font-weight: 700;
+}
+
+main > section:last-child > section article .products .p-img,
+main > section:last-child > section article .products .p-name,
+main > section:last-child > section article .cols .orderId,
+main > section:last-child > section article .cols .date {
+	text-align: left;
+}
+main > section:last-child > section article .products .p-img,
+main > section:last-child > section article .products .p-state,
+main > section:last-child > section article .cols .detail,
+main > section:last-child > section article .cols .date {
+	width: 15%;
+}
+main > section:last-child > section article .products .p-name,
+main > section:last-child > section article .cols .orderId {
+	width: 35%;
+}
+main > section:last-child > section article .products .p-price,
+main > section:last-child > section article .products .p-quantity,
+main > section:last-child > section article .cols .quantity,
+main > section:last-child > section article .cols .price {
+	width: 10%;
+}
+main > section:last-child > section article .products .p-quantity {
+	margin-right: 0.05em;
+	border-right: 1px solid #ebebeb;
+}
+main > section:last-child > section article .cols .total {
+	width: 15%;
+}
+main > section:last-child > section article .products .p-total {
+	width: 15%;
+}
+#myOrder > article > div {
+	position: relative;
+}
+#myOrder > article > div > .p-aside {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: flex;
+	align-items: center;
+	width: 30%;
+	padding: 2.8em 0;
+	justify-content: space-between;
+}
+#myOrder > article > div > .p-aside > .p-state {
+	margin-right: 5em;
+}
+#myOrder > article > div > .p-aside > .p-total {
+	font-weight: 700;
+	padding-left: 3em;
+}
+#myOrder > article > div > .products {
+	border-width: 50%;
+	border-bottom: 1px solid #ebebeb;
+}
+
+/********** 账户资料 **********/
+
+#personInfo {
+	padding: 0 1.8em;
+}
+#personInfo ul {
+	display: flex;
+	flex-direction: column;
+}
+#personInfo ul li {
+	display: flex;
+	padding: 2em 1.5em;
+	border-bottom: 1px solid #dadada;
+	color: #333;
+	font-size: 1.3em;
+	align-items: center;
+	justify-content: space-between;
+}
+#personInfo ul li:last-child {
+	border-bottom: none;
+}
+#personInfo ul li:first-child figure {
+	margin: 0;
+	display: flex;
+	align-items: center;
+}
+#personInfo ul li:first-child figure img {
+	width: 5em;
+	height: 5em;
+}
+#personInfo ul li:first-child figure figcaption {
+	margin-left: 1em;
+}
+#personInfo ul li:first-child figure figcaption p {
+	
+	margin: 0;
+	line-height: 2em;
+}
+#personInfo ul li:first-child > figure figcaption label {
+	padding: 0.5em 1em;
+	background: linear-gradient(#7ea3f5,#5a82f0);
+	border: none;
+	color: white;
+	outline: none;
+	border-radius: .3em;
+	cursor: pointer;
+	font-size: .6em;
+}
+#personInfo ul li:first-child > figure figcaption input {
+	outline: none;
+}
+#personInfo ul li > div > p {
+	margin: 0;
+}
+#personInfo ul li > div > p img {
+	width: 1.2em;
+	height: 1.2em;
+	vertical-align: middle;
+}
+#personInfo ul li > div > span {
+	display: inline-block;
+	padding: .5em 0 0 1.8em;
+	font-size: .8em;
+	color: #999;
+}
+#personInfo ul li > a {
+	color: #5079d9;
+    cursor: pointer;
+    font-size: .8em;
+}
+#personInfo ul li > a:hover {
+	color: #395699;
+}
+
+/********** 收货地址 **********/
+
+main > section:last-child > header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+main > section:last-child > header > a {
+	margin-right: 1.5em;
+	padding: .5em 1em;
+	cursor: pointer;
+    color: #fff;
+    font-size: 1.2em;
+    background: #a2a2a2;
+    transition: background .15s ease-in-out;
+    border-radius: .4em;
+}
+main > section:last-child > header > a:hover {
+	background: #5079d9;
+}
+
+#address > header {
+	padding: .8em 1.8em;
+	font-size: .8em;
+	background: #eee;
+    border-bottom: 1px solid #dbdbdb;
+}
+#address span {
+	display: inline-block;
+}
+#address span:nth-of-type(1) {
+	width: 20%;
+}
+#address span:nth-of-type(2) {
+	width: 45%;
+}
+#address span:nth-of-type(3) {
+	width: 15%;
+	text-align: center;
+}
+#address span:nth-of-type(4) {
+	width: 18%;
+	text-align: center;
+}
+#address > ul li {
+	padding: 2em 1.5em;
+	border-bottom: 1px solid #cfcfcf;
+}
+#address > ul li:last-child {
+	border-bottom: none;	
+}
+
+#add-address {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	transition: all .15s ease-in-out;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	filter: opacity(0);
+	z-index: -1;
+}
+#add-address > .bg {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,.65);
+	z-index: -1;
+}
+#add-address > div:last-child {
+	border: 1px solid #dcdcdc;
+	border-radius: .6em;
+	overflow: hidden;
+	background-color: white;
+}
+#add-address > div:last-child > header {
+	position: relative;
+	padding: 1em 8em;
+	font-size: 1.3em;
+	border-bottom: 1px solid #e6e6e6;
+    box-shadow: 0 1px 7px rgba(0,0,0,.06);
+    background: linear-gradient(#fbfbfb,#ececec);
+}
+#add-address > div:last-child > header p {
+	margin: 0;
+}
+#add-address > div:last-child > ul {
+	padding: 2em;
+}
+#add-address > div:last-child > ul li {
+	border: 1px solid #ccc;
+	margin-bottom: 1em;
+	border-radius: .4em;
+	overflow: hidden;
+}
+#add-address > div:last-child > ul li input {
+	padding: 1em .8em;
+	font-size: 1.2em;
+	border: none;
+	outline: none;
+	color: #666;
+}
+#add-address > div:last-child > ul li .error-name,
+#add-address > div:last-child > ul li .error-number {
+	position: relative;
+	left: 1em;
+	padding: 0.4em .8em;
+	background: #d16d62;
+	color: #fff;
+	border-radius: .3em;
+	transition: all .3s ease-in-out;
+	filter: opacity(0);
+}
+#add-address > div:last-child > ul li:last-child {
+	margin-bottom: 0;
+	border: none;
+}
+#add-address > div:last-child > ul li:last-child a {
+	display: block;
+	text-align: center;
+	font-size: 1.5em;
+	line-height: 2.5em;
+	color: white;
+	cursor: pointer;
+	background-color: #5a82f0;
+    box-shadow: 
+	    inset 0 1px 2px hsla(0,0%,100%,.1),
+	    inset 0 0 0 1px rgba(0,0,0,.2),
+	    0 1px 3px rgba(0,0,0,.1);
+}
+#add-address > div:last-child > ul li:last-child a:hover {
+	background-color: #5e88de;
+}
+#add-address > div:last-child > ul li select {
+	height: 3em;
+	width: 100%;
+	border: none;
+	font-size: 1.2em;
+	outline: none;
+	cursor: pointer;
+	line-height: 3em;
+	-webkit-appearance: none;
+	-webkit-padding-start: .8em;
+}
+#other {
+	width: 100%;
+}
+#error-all {
+	border: none !important;
+	padding: 0.4em .8em;
+	background: #d16d62;
+	color: #fff;
+	text-align: center;
+	transition: all 1s ease-in-out;
+	display: none;
+}
+#close {
+	position: absolute;
+	right: 1em;
+	bottom: 1em;
+	width: 1.2em;
+	height: 1.2em;
+	background: url('/img/icon/operator.png') -1em -1em no-repeat;
+	cursor: pointer;
+}
+.delAddress,
+.editAddress {
+	display: inline-block;
+	width: 2em;
+	height: 2em;
+	vertical-align: middle;
+	border-radius: .3em;
+	cursor: pointer;
+	transition: all .15s ease-in-out;
+}
+.editAddress {
+	background: url('/img/icon/addressOperator.png') -7px -112px no-repeat #a2a2a2;
+}
+.editAddress:hover {
+	background-color: #7595e4;
+}
+.delAddress {
+	background: url('/img/icon/addressOperator.png') -9px -262px no-repeat #f97474;
+}
+.delAddress:hover {
+	background-color: #e05b5b;
+}

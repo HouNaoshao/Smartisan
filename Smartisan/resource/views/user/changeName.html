@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>昵称修改 - 锤子科技</title>
+	<meta name="keywords" content="坚果手机,坚果R1手机,坚果3手机,坚果Pro手机,坚果手机官网">
+    <meta name="description" content="锤子科技是一家制造移动互联网终端设备的公司,
+        公司致力于打造用户体验一流的数码消费类产品（智能手机为主）,主打坚果手机系列有坚果R1手机,坚果3手机等">
+    <link rel="shortcut icon" href="/img/icon/favicon.ico">
+    <link rel="stylesheet" href="/css/user/register.css">
+</head>
+<body>
+	<main id="changePwd">
+		<header>昵称修改</header>
+		<section>
+			<form action="/user/changeName" method="post" autocomplete="off">
+				<ul>
+					<li>
+						<input type="hidden" name="name" v-model="name">
+						<label for="name"><span class="png-name"></span></label>
+						<input id="name" type="text" name="newName" pattern="[\w\u4e00-\u9fa5]+" placeholder="用户名" title='注意：可输入汉字、字母、数字和"_"' required autofocus v-model="changeName" @blur="checkName">
+						<span class="error-name">用户名已存在</span>
+					</li>
+				</ul>
+				<input id="submit" class="notAllowed" type="submit" value="修改">
+			</form>
+		</section>
+	</main>
+	<footer>
+		<p>本网站是个人学习网站开发技术的作品，若你有兴趣和我一块儿交流技术的话，请联系：</p>
+		<p>QQ：11644 82087 &nbsp;&nbsp;&nbsp; mobile：186 3101 2069 &nbsp;&nbsp;&nbsp; 姜展超</p>
+	</footer>
+
+	<script src="/lib/jquery-3.3.1.js"></script>
+	<script src="/lib/jquery.cookie.js"></script>
+    <script src="/lib/vue.js"></script>
+    <script src="/lib/axios.js"></script>
+    <script src="/vue/user/changePwd.js"></script>
+</body>
+</html>

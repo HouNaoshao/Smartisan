@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>个人中心 - 锤子科技</title>
+	<meta name="keywords" content="坚果手机,坚果R1手机,坚果3手机,坚果Pro手机,坚果手机官网">
+    <meta name="description" content="锤子科技是一家制造移动互联网终端设备的公司,
+        公司致力于打造用户体验一流的数码消费类产品（智能手机为主）,主打坚果手机系列有坚果R1手机,坚果3手机等">
+    <link rel="shortcut icon" href="/img/icon/favicon.ico">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/user/index.css">
+</head>
+<body>
+  <div id="user-index">
+    <header>
+        <span><a href="/"></a></span>
+        <ul id="nav">
+            <li><a href="/">在线商城</a></li>
+            <li><a href="#">坚果 R1</a></li>
+            <li><a href="#">坚果 TNT 工作站</a></li>
+            <li><a href="#">坚果 3</a></li>
+            <li><a href="#">Smartisan OS</a></li>
+            <li><a href="#">欢喜云</a></li>
+            <li><a href="#">应用</a></li>
+            <li><a href="#">论坛</a></li>
+            <li><a href="#">荣誉与奖项</a></li>
+        </ul>
+        <ul id="person">
+            <li>
+                <a id="p-avatar" :href="personUrl"></a>
+                <div id="p-info">
+                    <span></span>
+                    <div>
+                        <figure>
+                            <img :src="user.avatar">
+                            <figcaption>
+                                <span>{{ user.name }}</span>
+                            </figcaption>
+                        </figure>
+                        <ul>
+                            <li><a href="/user?component=myOrder">我的订单</a></li>
+                            <li><a href="/user?component=myInfo">账户资料</a></li>
+                            <li><a href="/user?component=myAddress">收货地址</a></li>
+                            <li><a href="/" @click="exit">退出</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a id="shortcar" :href="carUrl" @mouseenter="getShortCarItems"></a>
+                <span id="counter" :class="{ redQuantity: quantity === 0 ? false : true }">{{ quantity }}</span>
+                <div id="p-shortcar">
+                    <span></span>
+                    <div>
+                        <template v-if="shortCarArr.length !== 0">
+                            <ul>
+                                <li v-for="(item, index) of shortCarArr" :key="index">
+                                    <a :href="'/product/' + item.product._id">
+                                        <figure>
+                                            <img :src="item.smallImg.product[0]">
+                                            <figcaption>
+                                                <p>{{ item.product.name }}</p>
+                                                <p>{{ item.color.name }}</p>
+                                                <p>¥ {{ item.product.price }} 
+                                                    <span>&nbsp; x {{ item.quantity }}</span>
+                                                </p>
+                                            </figcaption>
+                                        </figure>
+                                    </a>
+                                    <span @click="delItemFromCar"></span>
+                                </li>
+                                </ul>
+                            <aside>
+                                <div>
+                                    <p>共{{ quantity }}件商品</p>
+                                    <p>合计：<span>¥ <span>{{ totalMoney }}</span></span></p>
+                                </div>
+                                <a href="/user/shortcar">去结算</a>
+                            </aside>
+                        </template>
+                        <template v-else>
+                            <figure>
+                                <img src="/img/icon/cart-empty.png">
+                                <figcaption><p>空空如也</p></figcaption>
+                            </figure>
+                        </template>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </header>
+
+    <main>
+        <section>
+            <figure>
+                <img :src="user.avatar">
+                <figcaption>
+                    <span>{{ user.name }}</span>
+                </figcaption>
+            </figure>
+            <ul id="aside">
+                <li @click='component = "myOrder"'>我的订单</li>
+                <li @click='component = "myInfo"'>账户资料</li>
+                <li @click='component = "myAddress"'>收货地址</li>
+            </ul>
+        </section>
+        <section :is="component" :user="user" :user-address-arr="userAddressArr" :order-arr="orderArr" @upload="upload" @show="show" @deladdress="delAddress" @editaddress="editAddress"></section>
+    </main>
+
+    <aside id="add-address">
+        <div class="bg"></div>
+        <div>
+            <header>
+                <p>管理收货地址</p>
+                <span id="close" @click="close"></span>
+            </header>
+            <ul>
+                <li>
+                    <input id="name" type="text" name="name" placeholder="姓名" title="可输入汉字和字母，至少是两个字符" required autofocus v-model="addressName" @blur="checkName"
+                    autocomplete="off">
+                    <span class="error-name">格式不正确</span>
+                </li>
+                <li>
+                    <input id="number" type="text" name="number" placeholder="手机号" title="11位数字" required v-model="number" @blur="checkNumber" autocomplete="off">
+                    <span class="error-number">格式不正确</span>
+                </li>
+                <li>
+                    <select v-model='addressTmp.provinceData' @change="getCity">
+                        <option value="">请选择省份</option>
+                        <option v-for="(address, index) of addressArr" :value="address.province + ';' + index">{{ address.province }}</option>
+                    </select>
+                </li>
+                <li>
+                    <template v-if="cityArr.length === 0">
+                        <select>
+                            <option value="">请选择城市</option>
+                        </select>
+                    </template>
+                    <template v-else>
+                        <select v-model='addressTmp.cityData' @change="getVillage">
+                            <option value="">请选择城市</option>
+                            <option v-for="(city, index) of cityArr" :value="city.name + ';' + index">{{ city.name }}</option>
+                        </select>
+                    </template>
+                </li>
+                <li>
+                    <template v-if="villageArr.length === 0">
+                        <select>
+                            <option value="">请选择区县</option>
+                        </select>
+                    </template>
+                    <template v-else>
+                        <select v-model='address.village' @change="checkEmpty">
+                            <option value="">请选择区县</option>
+                            <option v-for="village of villageArr" :value="village.name ">{{ village.name }}</option>
+                        </select>
+                    </template>
+                </li>
+                <li>
+                    <input id="other" type="text" name="other" placeholder="详细地址，如街道名称，楼层，门牌号码等" required v-model="address.other" @keyup="checkEmpty" autocomplete="off">
+                </li>
+                <li id="error-all">
+                    <span>请填写完所有项再保存</span>                    
+                </li>
+                <li>
+                    <a id="submit" class="notAllowedAbsolutely" @click="addAddress">保存</a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <footer>
+        <p>本网站是个人学习网站开发技术的作品，若你有兴趣和我一块儿交流技术的话，请联系：</p>
+        <p>QQ：11644 82087 &nbsp;&nbsp;&nbsp; mobile：186 3101 2069 &nbsp;&nbsp;&nbsp; 姜展超</p>
+    </footer>
+  </div>
+
+	<script src="/lib/jquery-3.3.1.js"></script>
+    <script src="/lib/jquery.cookie.js"></script>
+    <script src="/lib/vue.js"></script>
+    <script src="/lib/axios.js"></script>
+    <script src="/vue/user/index.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>结算成功 - Smartisan</title>
+    <meta name="keywords" content="坚果手机,坚果R1手机,坚果3手机,坚果Pro手机,坚果手机官网">
+    <meta name="description" content="锤子科技是一家制造移动互联网终端设备的公司,
+        公司致力于打造用户体验一流的数码消费类产品（智能手机为主）,主打坚果手机系列有坚果R1手机,坚果3手机等">
+    <link rel="shortcut icon" href="/img/icon/favicon.ico">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/user/shortCar.css">
+</head>
+<body>
+  <div id="car">
+    <header>
+        <span><a href="/"></a></span>
+        <ul id="nav">
+            <li><a href="/">在线商城</a></li>
+            <li><a href="#">坚果 R1</a></li>
+            <li><a href="#">坚果 TNT 工作站</a></li>
+            <li><a href="#">坚果 3</a></li>
+            <li><a href="#">Smartisan OS</a></li>
+            <li><a href="#">欢喜云</a></li>
+            <li><a href="#">应用</a></li>
+            <li><a href="#">论坛</a></li>
+            <li><a href="#">荣誉与奖项</a></li>
+        </ul>
+        <ul id="person">
+            <li>
+                <a id="p-avatar" :href="personUrl"></a>
+                <div id="p-info">
+                    <span></span>
+                    <div>
+                        <figure>
+                            <img :src="user.avatar">
+                            <figcaption>
+                                <span>{{ user.name }}</span>
+                            </figcaption>
+                        </figure>
+                        <ul>
+                            <li><a href="/user?component=myOrder">我的订单</a></li>
+                            <li><a href="/user?component=myInfo">账户资料</a></li>
+                            <li><a href="/user?component=myAddress">收货地址</a></li>
+                            <li><a href="/" @click="exit">退出</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </header>
+
+    <main>
+        <section class="settlement">
+            <header><p>结算结果</p></header>
+            <figure id="settlement">
+                <img src="/img/icon/settlementSuccessfully.png">
+                <figcaption>
+                    <p>结算成功</p>
+                    <a href="/user?component=myOrder">查看订单</a>
+                </figcaption>
+            </figure>
+        </section>
+    </main>
+
+    <footer>
+        <p>本网站是个人学习网站开发技术的作品，若你有兴趣和我一块儿交流技术的话，请联系：</p>
+        <p>QQ：11644 82087 &nbsp;&nbsp;&nbsp; mobile：186 3101 2069 &nbsp;&nbsp;&nbsp; 姜展超</p>
+    </footer>
+  </div>
+
+    <script src="/lib/jquery-3.3.1.js"></script>
+    <script src="/lib/jquery.cookie.js"></script>
+    <script src="/lib/vue.js"></script>
+    <script src="/lib/axios.js"></script>
+    <script src="/vue/user/shortCar.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

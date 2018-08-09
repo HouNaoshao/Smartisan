@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>【锤子科技官网】坚果手机 - 坚果R1手机 - 坚果3手机</title>
+    <meta name="keywords" content="坚果手机,坚果R1手机,坚果3手机,坚果Pro手机,坚果手机官网">
+    <meta name="description" content="锤子科技是一家制造移动互联网终端设备的公司,
+        公司致力于打造用户体验一流的数码消费类产品（智能手机为主）,主打坚果手机系列有坚果R1手机,坚果3手机等">
+    <link rel="shortcut icon" href="/img/icon/favicon.ico">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+  <div id="index">
+    <header>
+        <span><a href="/"></a></span>
+        <ul id="nav">
+            <li><a href="/">在线商城</a></li>
+            <li><a href="#">坚果 R1</a></li>
+            <li><a href="#">坚果 TNT 工作站</a></li>
+            <li><a href="#">坚果 3</a></li>
+            <li><a href="#">Smartisan OS</a></li>
+            <li><a href="#">欢喜云</a></li>
+            <li><a href="#">应用</a></li>
+            <li><a href="#">论坛</a></li>
+            <li><a href="#">荣誉与奖项</a></li>
+        </ul>
+        <ul id="person">
+            <li>
+                <a id="p-avatar" :href="personUrl"></a>
+                <div id="p-info">
+                    <span></span>
+                    <div>
+                        <figure>
+                            <img :src="user.avatar">
+                            <figcaption>
+                                <span>{{ user.name }}</span>
+                            </figcaption>
+                        </figure>
+                        <ul>
+                            <li><a href="/user?component=myOrder">我的订单</a></li>
+                            <li><a href="/user?component=myInfo">账户资料</a></li>
+                            <li><a href="/user?component=myAddress">收货地址</a></li>
+                            <li><a href="/" @click="exit">退出</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a id="shortcar" :href="carUrl" @mouseenter="getShortCarItems"></a>
+                <span id="counter" :class="{ redQuantity: quantity === 0 ? false : true }">{{ quantity }}</span>
+                <div id="p-shortcar">
+                    <span></span>
+                    <div>
+                        <template v-if="shortCarArr.length !== 0">
+                            <ul>
+                                <li v-for="(item, index) of shortCarArr" :key="index">
+                                    <a :href="'/product/' + item.product._id">
+                                        <figure>
+                                            <img :src="item.smallImg.product[0]">
+                                            <figcaption>
+                                                <p>{{ item.product.name }}</p>
+                                                <p>{{ item.color.name }}</p>
+                                                <template v-if="item.capacity">
+                                                    <p>¥ {{ item.capacity.price }} 
+                                                        <span>&nbsp; x {{ item.quantity }}</span>
+                                                    </p>
+                                                </template>
+                                                <template v-else>
+                                                    <p>¥ {{ item.product.price }} 
+                                                        <span>&nbsp; x {{ item.quantity }}</span>
+                                                    </p>
+                                                </template>
+                                            </figcaption>
+                                        </figure>
+                                    </a>
+                                    <span @click="delItemFromCar"></span>
+                                </li>
+                            </ul>
+                            <aside>
+                                <div>
+                                    <p>共{{ quantity }}件商品</p>
+                                    <p>合计：<span>¥ <span>{{ totalMoney }}</span></span></p>
+                                </div>
+                                <a href="/user/shortcar">去结算</a>
+                            </aside>
+                        </template>
+                        <template v-else>
+                            <figure>
+                                <img src="/img/icon/cart-empty.png">
+                                <figcaption><p>空空如也</p></figcaption>
+                            </figure>
+                        </template>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </header>
+
+    <main>
+        <section>
+            <figure id="banner">
+                <img class="showFigure" src="/img/figure/figure2.png" >
+                <img src="/img/figure/figure1.png" >
+                <img src="/img/figure/figure3.png" >
+                <ul>
+                    <li class="changeButton"></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </figure>            
+        </section>
+        <article id="hot-Products">
+            <header>
+                <span>热门商品</span>
+                <span>
+                    <a id="left" class="disable"></a>
+                    <a id="right"></a>
+                </span>
+            </header>
+            <ul>
+                <li v-for="(item, index) of hpData.products">
+                    <figure>
+                        <img :src="hpData.smallImgs[index][0].product[0]">
+                        <figcaption>
+                            <p>{{ item.name }}</p>
+                            <p>{{ item.feature }}</p>
+                        </figcaption>
+                    </figure>
+                    <ul>
+                        <li v-for="(color, i) of hpData.colors[index]" :class="{ outerDot: i === 0 ? true : false }" @mouseenter="dotEvent">
+                           <img :src="color.url">
+                        </li>
+                    </ul>
+                    <template v-if="item.price === undefined">
+                        <p>¥ {{ hpData.capacitys[index][0].price }}</p>
+                        <aside>
+                            <a class="checkDetail" :href="/product/ + item._id">查看详情</a>
+                        </aside>
+                    </template>
+                    <template v-else>
+                        <p>¥ {{ item.price }}</p>
+                        <aside>
+                            <a class="checkDetail" :href="/product/ + item._id">查看详情</a>
+                            <a class="addToCart" @click="addToCart1">加入购物车</a>
+                        </aside>
+                    </template>
+                </li>
+            </ul>
+        </article>
+        <article class="products">
+            <header>
+                <span>坚果R1及官方配件</span>
+            </header>
+            <ul>
+                <li>
+                    <figure>
+                        <a href="/product/5b66a32867502401ef6e7e37">
+                            <img src="/img/product/small/坚果R1及官方配件/坚果R1-ad.jpg">
+                        </a>
+                    </figure>
+                </li>
+                <li v-for="(item, index) of rpData.products">
+                    <figure>
+                        <img :src="rpData.smallImgs[index][0].product[0]">
+                        <figcaption>
+                            <p>{{ item.name }}</p>
+                            <p>{{ item.feature }}</p>
+                        </figcaption>
+                    </figure>
+                    <ul>
+                        <li v-for="(color, i) of rpData.colors[index]" :class="{ outerDot: i === 0 ? true : false }" @mouseenter="dotEvent2">
+                           <img :src="color.url">
+                        </li>
+                    </ul>
+                    <template v-if="item.price === undefined">
+                        <p>¥ {{ rpData.capacitys[index][0].price }}</p>
+                        <aside>
+                            <a class="checkDetail" :href="/product/ + item._id">查看详情</a>
+                        </aside>
+                    </template>
+                    <template v-else>
+                        <p>¥ {{ item.price }}</p>
+                        <aside>
+                            <a class="checkDetail" :href="/product/ + item._id">查看详情</a>
+                            <a class="addToCart" @click="addToCart2">加入购物车</a>
+                        </aside>
+                    </template>
+                </li>
+            </ul>
+        </article>
+
+        <article class="products">
+            <header>
+                <span>官方精选</span>
+            </header>
+            <ul>
+                <li>
+                    <figure>
+                        <a href="/product/5b66ae0989935201efda30e2">
+                            <img src="/img/product/small/官方精选/坚果Pro2-ad.jpg">
+                        </a>
+                    </figure>
+                </li>
+                <li v-for="(item, index) of cData.products">
+                    <figure>
+                        <img :src="cData.smallImgs[index][0].product[0]">
+                        <figcaption>
+                            <p>{{ item.name }}</p>
+                            <p>{{ item.feature }}</p>
+                        </figcaption>
+                    </figure>
+                    <ul>
+                        <li v-for="(color, i) of cData.colors[index]" :class="{ outerDot: i === 0 ? true : false }" @mouseenter="dotEvent2">
+                           <img :src="color.url">
+                        </li>
+                    </ul>
+                    <template v-if="item.price === undefined">
+                        <p>¥ {{ cData.capacitys[index][0].price }}</p>
+                        <aside>
+                            <a class="checkDetail" :href="/product/ + item._id">查看详情</a>
+                        </aside>
+                    </template>
+                    <template v-else>
+                        <p>¥ {{ item.price }}</p>
+                        <aside>
+                            <a class="checkDetail" :href="/product/ + item._id">查看详情</a>
+                            <a class="addToCart" @click="addToCart2">加入购物车</a>
+                        </aside>
+                    </template>
+                </li>
+            </ul>
+        </article>
+
+        <article class="products">
+            <header>
+                <span>净化器及配件</span>
+            </header>
+            <ul>
+                <li>
+                    <figure>
+                        <a href="/product/5b66b97289935201efda30e5">
+                            <img src="/img/product/small/净化器及配件/畅呼吸-ad.jpg">
+                        </a>
+                    </figure>
+                </li>
+                <li v-for="(item, index) of clData.products">
+                    <figure>
+                        <img :src="clData.smallImgs[index][0].product[0]">
+                        <figcaption>
+                            <p>{{ item.name }}</p>
+                            <p>{{ item.feature }}</p>
+                        </figcaption>
+                    </figure>
+                    <ul>
+                        <li v-for="(color, i) of clData.colors[index]" :class="{ outerDot: i === 0 ? true : false }" @mouseenter="dotEvent2">
+                           <img :src="color.url">
+                        </li>
+                    </ul>
+                    <template v-if="item.price === undefined">
+                        <p>¥ {{ clData.capacitys[index][0].price }}</p>
+                        <aside>
+                            <a class="checkDetail" :href="/product/ + item._id">查看详情</a>
+                        </aside>
+                    </template>
+                    <template v-else>
+                        <p>¥ {{ item.price }}</p>
+                        <aside>
+                            <a class="checkDetail" :href="/product/ + item._id">查看详情</a>
+                            <a class="addToCart" @click="addToCart2">加入购物车</a>
+                        </aside>
+                    </template>
+                </li>
+            </ul>
+        </article>
+
+    </main>
+
+    <span id="addSuccess">已添加至购物车</span>
+
+    <footer>
+        <p>本网站是个人学习网站开发技术的作品，若你有兴趣和我一块儿交流技术的话，请联系：</p>
+        <p>QQ：11644 82087 &nbsp;&nbsp;&nbsp; mobile：186 3101 2069 &nbsp;&nbsp;&nbsp; 姜展超</p>
+    </footer>
+  </div>
+
+    <script src="/lib/jquery-3.3.1.js"></script>
+    <script src="/lib/jquery.cookie.js"></script>
+    <script src="/lib/vue.js"></script>
+    <script src="/lib/axios.js"></script>
+    <script src="/vue/index.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/index.js"></script>
+</body>
+</html>
