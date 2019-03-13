@@ -59,5 +59,3 @@ A beginning coder's Eden Garden.
 ![image](https://github.com/HouNaoshao/Smartisan/blob/master/capture/31.png)  
 ![image](https://github.com/HouNaoshao/Smartisan/blob/master/capture/32.png)  
 ![image](https://github.com/HouNaoshao/Smartisan/blob/master/capture/33.png)  
-![image](https://github.com/HouNaoshao/Smartisan/blob/master/capture/34.png)  
-![image](https://github.com/HouNaoshao/Smartisan/blob/master/capture/35.png)  
