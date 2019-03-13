@@ -1,8 +1,7 @@
 # Smartisan
 A beginning coder's Eden Garden.
 
-大家好，这是仿照锤子科技官方网站做的一个“锤友商城”。我是刚毕业的大学生， 希望把自己的努力成果通过GitHub展示出来，来找到自己满意的工作。 
-我大概地计算了一下代码量，本网站的前后端总共大概有6731行代码（包含HTML、CSS、JS），40个手写文件。
+大家好，这是仿照锤子科技官方网站做的一个“锤友商城”。我是刚毕业的大学生，经过一段时间的修炼，我终于算是迈入了前端的门槛。所以希望通过 GitHub 这个程序员的圣地把自己的努力成果展示出来，顺便找到一份自己满意的工作。 （本 GitHub 仓库包含前后端代码源码以及网站的截图，但不包含数据库和网站所使用的图片）
 
 开发环境很简单：  
 1、Chrome浏览器  
@@ -11,19 +10,18 @@ A beginning coder's Eden Garden.
 4、以及我最喜欢的Mac OS操作系统  
 
 总共涉及到以下技术（中间件不在计算内）：  
-1、HTML5  
-2、CSS3  
-3、cookie  
-4、JavaScript  
-5、jQuery  
-6、Vue.js  
-7、axios  
-8、Node.js  
-9、koa  
-10、MongoDB
+1、HTML5
+2、CSS3
+3、cookie
+4、JavaScript
+5、Vue.js  
+6、axios
+7、Node.js
+8、koa2
+9、MongoDB
 
 
-“🔨官网”美图欣赏：  
+“锤友商城”美图鉴赏😄：  
   
 ![image](https://github.com/HouNaoshao/Smartisan/blob/master/capture/1.png)  
 ![image](https://github.com/HouNaoshao/Smartisan/blob/master/capture/2.png)  
