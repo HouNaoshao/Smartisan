@@ -10,15 +10,15 @@ A beginning coder's Eden Garden.
 4、以及我最喜欢的Mac OS操作系统  
 
 总共涉及到以下技术（中间件不在计算内）：  
-1、HTML5
-2、CSS3
-3、cookie
-4、JavaScript
+1、HTML5  
+2、CSS3  
+3、cookie  
+4、JavaScript  
 5、Vue.js  
-6、axios
-7、Node.js
-8、koa2
-9、MongoDB
+6、axios  
+7、Node.js  
+8、koa2  
+9、MongoDB  
 
 
 “锤友商城”美图鉴赏😄：  
@@ -58,4 +58,3 @@ A beginning coder's Eden Garden.
 ![image](https://github.com/HouNaoshao/Smartisan/blob/master/capture/30.png)  
 ![image](https://github.com/HouNaoshao/Smartisan/blob/master/capture/31.png)  
 ![image](https://github.com/HouNaoshao/Smartisan/blob/master/capture/32.png)  
-![image](https://github.com/HouNaoshao/Smartisan/blob/master/capture/33.png)  
